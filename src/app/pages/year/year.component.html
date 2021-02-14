@@ -1,0 +1,42 @@
+<div class="main-container">
+    <div class="card" style="margin: auto;">
+        <ng-container *ngIf="isLoading; else elseTemplate">
+            <mat-spinner class="spinner" 
+            mode="indeterminate" value="50" diameter="50"></mat-spinner>
+        </ng-container>
+        <ng-template #elseTemplate>
+            <div class="card-body">
+                <h5 class="card-title">Chart</h5>
+              <ng-container>
+                  <div class="container" style="display: flex">
+                    <ng-container *ngFor="let item of getTotalAsArray(); let i = index">
+                        <div [ngClass]="{'node': true, 'active': i <= progress}"></div>
+                    </ng-container>
+                  </div>
+              </ng-container>
+    
+              <div class="options-container">
+                <div class="sector">
+                    <label for="typeahead-format">Target Years</label>            
+                    <input id="typeahead-format" type="number" class="form-control" [(ngModel)]="targetYear" style="width: 5rem;" (ngModelChange)="targetYearChanged($event)"/>
+                </div>            
+                
+                <div  class="sector" ngbDropdown style="display: flex; flex-direction: column; width: 10rem;">
+                  <label for="dropdownBasic1">View By:</label>
+                  <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>{{ viewByUnit.toUpperCase() }}</button>
+                  <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                    <button ngbDropdownItem (click)="viewBy('year', 1)">Years</button>
+                    <button ngbDropdownItem (click)="viewBy('month', 1)">Months</button>
+                    <button ngbDropdownItem (click)="viewBy('week', 1)">Weeks</button>
+                    <!-- <button ngbDropdownItem (click)="viewBy('days', 1)">Days</button> -->
+                  </div>
+              </div>
+    
+              </div>
+            </div>
+            <div class="card-footer">
+                <p>Progress <span class="font-weight-bold">{{ progress }}</span>/<span class="font-weight-bold font-smaller">{{ total }}</span> {{viewByUnit.toUpperCase()}}</p>        
+            </div>
+        </ng-template>        
+      </div>
+</div>

@@ -1,0 +1,21 @@
+<div class="card center" style="width: 18rem;">
+    <!-- <img src="..." class="card-img-top" alt="..."> -->
+    <div class="card-body">
+      <h5 class="card-title">Chart</h5>
+      <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+      <ngb-datepicker #d
+        (dateSelect)="onDateSelect($event)"
+        [minDate]="{year: 1700, month: 1, day: 1}"
+        [maxDate]="{year: 2048, month: 12, day: 31}"
+      ></ngb-datepicker>
+      <!-- <input type="text" [(ngModel)]="birthdate" ngbDatepicker #d="ngbDatepicker"/>
+      <button (click)="d.toggle()">Toggle</button> -->
+  
+      <!-- <div class="input-group-append"> -->
+      <button class="btn btn-primary calendar" type="button" (click)="submit()" style="margin: 16px 0; float: right;">
+        Proceed
+      </button>
+      <!-- </div> -->
+      <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+    </div>
+  </div>
