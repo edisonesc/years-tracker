@@ -7,8 +7,13 @@ import * as moment from 'moment'
 })
 export class YearComponent implements OnInit {  
   //view
-  total: number;
-  progress: number;
+  total: {
+    date: string
+  }[];
+
+  progress: {
+    date: string
+  }[];
 
   // internal
   dateFormat = "YYYY-MM-DD";
@@ -37,22 +42,23 @@ export class YearComponent implements OnInit {
   }
 
   initProgress(unit) {    
-    this.progress = 0;
+    this.progress = [];
     let startDate = moment(this.formatDateOfBirth()).startOf(unit).format(this.dateFormat);
-    let endDate = moment().startOf(unit).format(this.dateFormat);    
-    while(startDate <= endDate) {
-      this.progress += 1;
+    let endDate = moment().startOf(unit).format(this.dateFormat);   
+    this.progress.push({date: startDate}) 
+    while(startDate < endDate) {
       startDate = moment(startDate).add(this.viewByValue, unit).format(this.dateFormat);
+      this.progress.push({date: moment(startDate).format('LL')});
     }
   }
 
   initTotal(unit) {
-    this.total = 0;
-    let startDate = moment(this.formatDateOfBirth()).startOf(unit).format(this.dateFormat);
+    this.total = [];
+    let startDate = moment(this.formatDateOfBirth()).subtract(1, 'year').startOf(unit).format(this.dateFormat);
     let endDate = moment(this.formatDateOfBirth()).add(this.targetYear, 'years').startOf(unit).format(this.dateFormat);
-    while(startDate <= endDate) {
-      this.total += 1;
+    while(startDate < endDate) {
       startDate = moment(startDate).add(this.viewByValue, unit).format(this.dateFormat);
+      this.total.push({date: moment(startDate).format('LL')});
     }
   }
 
@@ -66,12 +72,12 @@ export class YearComponent implements OnInit {
   }
 
   getTotalAsArray() {
-    return new Array(this.total);
+    return this.total;
   }
 
   targetYearChanged(event) {    
     this.refreshTable();
-    localStorage.setItem('target_year', event.toString());
+    localStorage.setItem('target_year', event?.toString());
   }
 
   viewBy(unit, value) {

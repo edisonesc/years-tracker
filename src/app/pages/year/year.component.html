@@ -10,7 +10,10 @@
               <ng-container>
                   <div class="container" style="display: flex">
                     <ng-container *ngFor="let item of getTotalAsArray(); let i = index">
-                        <div [ngClass]="{'node': true, 'active': i <= progress}"></div>
+                        <button type="button" class="btn"  placement="top"
+                        ngbPopover="{{ total[i]?.date && i < progress?.length ? total[i]?.date : total[i]?.date + ': Undiscovered'}}" popoverTitle="Date"
+                        [ngClass]="{'node': true, 'active': i < progress?.length}">
+                      </button>                      
                     </ng-container>
                   </div>
               </ng-container>
@@ -35,7 +38,7 @@
               </div>
             </div>
             <div class="card-footer">
-                <p>Progress <span class="font-weight-bold">{{ progress - 1 }}</span>/<span class="font-weight-bold font-smaller">{{ total -1 }}</span> {{viewByUnit.toUpperCase()}}</p>        
+                <p>Progress <span class="font-weight-bold">{{ progress?.length }}</span>/<span class="font-weight-bold font-smaller">{{ total?.length - 1 }}</span> {{viewByUnit.toUpperCase()}}</p>        
             </div>
         </ng-template>        
       </div>

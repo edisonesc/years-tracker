@@ -8,7 +8,9 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "ghpages:release": "git checkout gh-pages && git push origin --delete gh-pages || : && ng build --prod --base-href https://edisonesc.github.io/years-tracker/ && ngh --dir=dist/year-app"
+    "ghpages:release": "git checkout gh-pages && git push origin --delete gh-pages || : && ng build --prod --base-href https://edisonesc.github.io/years-tracker/ && ngh --dir=dist/year-app",
+    "git:push": "git push origin gh-pages:main",
+    "pnr": "npm run git:push && npm run ghpages:release"
   },
   "private": true,
   "dependencies": {
