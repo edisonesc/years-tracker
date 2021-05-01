@@ -7,8 +7,8 @@
 }
 
 .node {
-  height: 12px;
-  width: 12px;
+  height: 25px;
+  width: auto;
   background: #4444442e;
   margin: 2px;
   border-radius: 0px;
@@ -27,15 +27,32 @@
 }
 
 .main-container {
-  width: 100vw;
-  height: 100vh;
+  width: fit-content;
+  height: fit-content;
   display: flex;
+
+  margin: auto;
+  height: 100%;
 }
 
 .options-container {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   .sector {
     margin-right: 16px;
+  }
+}
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+  /* Styles */
+  .body {
+    padding: 16px !important;
+  }
+  .container {
+    justify-content: center;
+    .node {
+    }
   }
 }
